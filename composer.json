@@ -1,7 +1,7 @@
 {
   "name": "lendable/symfony-messenger-polyfill",
   "description": "Use symfony messenger with older symfony versions.",
-  "type": "library",
+  "type": "symfony-bundle",
   "authors": [
     {
       "name": "Lendable Ltd",
@@ -15,7 +15,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Lendable\\Polyfill\\": "tests/"
+      "Tests\\Lendable\\Polyfill\\": "tests/"
     }
   },
   "require": {
@@ -23,11 +23,13 @@
     "symfony/config": "^3.4 || ^4.1",
     "symfony/console": "^3.4 || ^4.1",
     "symfony/dependency-injection": "^3.4 || ^4.1",
+    "symfony/framework-bundle": "^3.4 || >=4.0 < 4.1",
     "symfony/http-kernel": "^3.4 || ^4.1",
     "symfony/messenger": "^4.2"
   },
   "require-dev": {
-    "phpunit/phpunit": "^7.4"
+    "phpunit/phpunit": "^7.4",
+    "matthiasnoback/symfony-dependency-injection-test": "^3.0"
   },
   "conflict": {
     "symfony/framework-bundle": ">=4.1"
