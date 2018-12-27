@@ -1,0 +1,47 @@
+{
+  "name": "lendable/symfony-messenger-polyfill",
+  "description": "Use symfony messenger with older symfony versions.",
+  "type": "symfony-bundle",
+  "authors": [
+    {
+      "name": "Lendable Ltd",
+      "email": "dev@lendable.co.uk"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Lendable\\Polyfill\\Symfony\\MessengerBundle\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\Lendable\\Polyfill\\Symfony\\MessengerBundle\\": "tests/",
+      "Tests\\Lendable\\Polyfill\\Symfony\\MessengerBundle\\Features\\Fixtures\\Project\\": "features/Fixtures/Project/src",
+      "Tests\\Lendable\\Polyfill\\Symfony\\MessengerBundle\\Features\\": "features/"
+    }
+  },
+  "require": {
+    "php": ">=7.1",
+    "symfony/config": "^3.4 || ^4.1",
+    "symfony/console": "^3.4 || ^4.1",
+    "symfony/dependency-injection": "^3.4 || ^4.1",
+    "symfony/framework-bundle": "^3.4 || >=4.0 < 4.1",
+    "symfony/http-kernel": "^3.4 || ^4.1",
+    "symfony/messenger": "^4.2"
+  },
+  "require-dev": {
+    "behat/behat": "^3.5",
+    "behat/symfony2-extension": "^2.1",
+    "phpunit/phpunit": "^7.4",
+    "matthiasnoback/symfony-dependency-injection-test": "^3.0",
+    "symfony/stopwatch": "^3.4 || ^4.1"
+  },
+  "scripts": {
+    "tests:behat": [
+      "behat --strict --colors -vvv"
+    ],
+    "tests:unit": [
+      "phpunit --colors --coverage-clover build/logs/clover.xml"
+    ]
+  }
+}

@@ -1,0 +1,25 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <defaults public="false" />
+
+        <service id="console.command.messenger_consume_messages" class="Symfony\Component\Messenger\Command\ConsumeMessagesCommand">
+            <argument /> <!-- Message bus locator -->
+            <argument type="service" id="messenger.receiver_locator" />
+            <argument type="service" id="logger" on-invalid="null" />
+            <argument type="collection" /> <!-- Receiver names -->
+            <argument type="collection" /> <!-- Message bus names -->
+
+            <tag name="console.command" command="messenger:consume-messages" />
+        </service>
+
+        <service id="console.command.messenger_debug" class="Symfony\Component\Messenger\Command\DebugCommand">
+            <argument type="collection" /> <!-- Message to handlers mapping -->
+            <tag name="console.command" command="debug:messenger" />
+        </service>
+    </services>
+</container>
