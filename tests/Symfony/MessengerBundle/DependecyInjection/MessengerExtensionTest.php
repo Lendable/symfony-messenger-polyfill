@@ -11,6 +11,9 @@ final class MessengerExtensionTest extends AbstractExtensionTestCase
 {
     public function testInContainer(): void
     {
+        $this->container
+            ->setParameter('kernel.debug', false);
+
         $this->load();
 
         $this->assertContainerBuilderHasService('messenger.middleware.handle_message');

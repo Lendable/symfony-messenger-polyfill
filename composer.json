@@ -15,7 +15,9 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Tests\\Lendable\\Polyfill\\": "tests/"
+      "Tests\\Lendable\\Polyfill\\": "tests/",
+      "Tests\\Lendable\\Polyfill\\Features\\Fixtures\\Project\\": "features/Fixtures/Project/src",
+      "Tests\\Lendable\\Polyfill\\Features\\": "features/"
     }
   },
   "require": {
@@ -28,8 +30,11 @@
     "symfony/messenger": "^4.2"
   },
   "require-dev": {
+    "behat/behat": "^3.5",
+    "behat/symfony2-extension": "^2.1",
     "phpunit/phpunit": "^7.4",
-    "matthiasnoback/symfony-dependency-injection-test": "^3.0"
+    "matthiasnoback/symfony-dependency-injection-test": "^3.0",
+    "symfony/stopwatch": "^3.4 || ^4.1"
   },
   "conflict": {
     "symfony/framework-bundle": ">=4.1"

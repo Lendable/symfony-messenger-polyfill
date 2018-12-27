@@ -1,0 +1,13 @@
+default:
+  suites:
+    default:
+      contexts:
+        - Tests\Lendable\Polyfill\Features\Context\MessengerContext:
+            messageBus: '@Symfony\Component\Messenger\MessageBusInterface'
+  extensions:
+    Behat\Symfony2Extension:
+      kernel:
+        env: test
+        debug: true
+        path: features/Fixtures/Project/src/Kernel.php
+        class: Tests\Lendable\Polyfill\Features\Fixtures\Project\Kernel

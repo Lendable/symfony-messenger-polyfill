@@ -37,8 +37,8 @@ final class MessengerExtension extends ConfigurableExtension
         $this->registerMessengerConfiguration(
             $config,
             $container,
-            $frameworkConfig['serializer'],
-            $frameworkConfig['validation']
+            $frameworkConfig['serializer'] ?? [],
+            $frameworkConfig['validation'] ?? []
         );
     }
 
@@ -53,7 +53,7 @@ final class MessengerExtension extends ConfigurableExtension
             $container->removeDefinition('messenger.transport.amqp.factory');
         } else {
             if ('messenger.transport.symfony_serializer' === $config['serializer']['id']) {
-                if (!$this->isConfigEnabled($container, $serializerConfig)) {
+                if (!($serializerConfig['enabled'] ?? false)) {
                     throw new \LogicException('The default Messenger serializer cannot be enabled as the Serializer support is not available. Try enabling it or running "composer require symfony/serializer-pack".');
                 }
 
@@ -90,7 +90,7 @@ final class MessengerExtension extends ConfigurableExtension
             }
 
             foreach ($middleware as $middlewareItem) {
-                if (!$validationConfig['enabled'] && \in_array($middlewareItem['id'], array('validation', 'messenger.middleware.validation'), true)) {
+                if (!($validationConfig['enabled'] ?? false) && \in_array($middlewareItem['id'], array('validation', 'messenger.middleware.validation'), true)) {
                     throw new \LogicException('The Validation middleware is only available when the Validator component is installed and enabled. Try running "composer require symfony/validator".');
                 }
             }
@@ -113,7 +113,7 @@ final class MessengerExtension extends ConfigurableExtension
         $senderAliases = array();
         foreach ($config['transports'] as $name => $transport) {
             if (0 === strpos($transport['dsn'], 'amqp://') && !$container->hasDefinition('messenger.transport.amqp.factory')) {
-                throw new LogicException('The default AMQP transport is not available. Make sure you have installed and enabled the Serializer component. Try enabling it or running "composer require symfony/serializer-pack".');
+                throw new \LogicException('The default AMQP transport is not available. Make sure you have installed and enabled the Serializer component. Try enabling it or running "composer require symfony/serializer-pack".');
             }
 
             $transportDefinition = (new Definition(TransportInterface::class))
@@ -129,7 +129,7 @@ final class MessengerExtension extends ConfigurableExtension
         $messagesToSendAndHandle = array();
         foreach ($config['routing'] as $message => $messageConfiguration) {
             if ('*' !== $message && !class_exists($message) && !interface_exists($message, false)) {
-                throw new LogicException(sprintf('Invalid Messenger routing configuration: class or interface "%s" not found.', $message));
+                throw new \LogicException(sprintf('Invalid Messenger routing configuration: class or interface "%s" not found.', $message));
             }
             $senders = array();
             foreach ($messageConfiguration['senders'] as $sender) {
