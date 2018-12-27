@@ -7,5 +7,4 @@ mkdir --parents "${HOME}/bin"
 wget https://github.com/satooshi/php-coveralls/releases/download/v1.0.1/coveralls.phar --output-document="${HOME}/bin/coveralls"
 chmod u+x "${HOME}/bin/coveralls"
 
-if [ "$SYMFONY" != "" ]; then composer require "symfony/symfony:$SYMFONY" --no-update; fi;
-composer install --dev --prefer-dist
+composer update --dev --prefer-lowest
