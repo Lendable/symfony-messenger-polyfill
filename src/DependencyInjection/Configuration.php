@@ -23,7 +23,7 @@ final class Configuration implements ConfigurationInterface
             ->useAttributeAsKey('message_class')
             ->beforeNormalization()
             ->always()
-            ->then(static function ($config) {
+            ->then(static function ($config): array {
                 if (!\is_array($config)) {
                     return [];
                 }
@@ -32,16 +32,16 @@ final class Configuration implements ConfigurationInterface
                 foreach ($config as $k => $v) {
                     if (!\is_int($k)) {
                         $newConfig[$k] = [
-                                    'senders' => $v['senders'] ?? (\is_array($v) ? \array_values($v) : [$v]),
-                                    'send_and_handle' => $v['send_and_handle'] ?? false,
-                                ];
+                            'senders' => $v['senders'] ?? (\is_array($v) ? \array_values($v) : [$v]),
+                            'send_and_handle' => $v['send_and_handle'] ?? false,
+                        ];
                     } else {
                         $newConfig[$v['message-class']]['senders'] = \array_map(
-                                    static function ($a) {
-                                        return \is_string($a) ? $a : $a['service'];
-                                    },
-                                    \array_values($v['sender'])
-                                );
+                            static function ($a) {
+                                return \is_string($a) ? $a : $a['service'];
+                            },
+                            \array_values($v['sender'])
+                        );
                         $newConfig[$v['message-class']]['send-and-handle'] = $v['send-and-handle'] ?? false;
                     }
                 }
@@ -63,7 +63,7 @@ final class Configuration implements ConfigurationInterface
             ->addDefaultsIfNotSet()
             ->beforeNormalization()
             ->always()
-            ->then(static function ($config) {
+            ->then(static function ($config): array {
                 if (false === $config) {
                     return ['id' => null];
                 }
@@ -91,7 +91,7 @@ final class Configuration implements ConfigurationInterface
             ->arrayPrototype()
             ->beforeNormalization()
             ->ifString()
-            ->then(static function (string $dsn) {
+            ->then(static function (string $dsn): array {
                 return ['dsn' => $dsn];
             })
             ->end()
@@ -120,10 +120,10 @@ final class Configuration implements ConfigurationInterface
             ->end()
             ->arrayNode('middleware')
             ->beforeNormalization()
-            ->ifTrue(static function ($v) {
+            ->ifTrue(static function ($v): bool {
                 return \is_string($v) || (\is_array($v) && !\is_int(\key($v)));
             })
-            ->then(static function ($v) {
+            ->then(static function ($v): array {
                 return [$v];
             })
             ->end()
@@ -143,9 +143,9 @@ final class Configuration implements ConfigurationInterface
                 }
 
                 return [
-                                            'id' => \key($middleware),
-                                            'arguments' => \current($middleware),
-                                        ];
+                    'id' => \key($middleware),
+                    'arguments' => \current($middleware),
+                ];
             })
             ->end()
             ->fixXmlConfig('argument')
