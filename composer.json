@@ -35,5 +35,13 @@
     "phpunit/phpunit": "^7.4",
     "matthiasnoback/symfony-dependency-injection-test": "^3.0",
     "symfony/stopwatch": "^3.4 || ^4.1"
+  },
+  "scripts": {
+    "tests:behat": [
+      "behat --strict --colors -vvv"
+    ],
+    "tests:unit": [
+      "phpunit --colors --coverage-clover build/logs/clover.xml"
+    ]
   }
 }
