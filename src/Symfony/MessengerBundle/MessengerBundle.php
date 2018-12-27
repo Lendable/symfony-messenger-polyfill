@@ -10,7 +10,7 @@ use Symfony\Component\Messenger\DependencyInjection\MessengerPass;
 
 final class MessengerBundle extends Bundle
 {
-    public function build(ContainerBuilder $container)
+    public function build(ContainerBuilder $container): void
     {
         $container->addCompilerPass(new MessengerPass());
     }

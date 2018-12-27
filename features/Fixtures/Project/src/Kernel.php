@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Lendable\Polyfill\Features\Fixtures\Project;
 
 use Lendable\Polyfill\Symfony\MessengerBundle\MessengerBundle;
@@ -18,7 +20,7 @@ class Kernel extends BaseKernel
 
     public function getProjectDir()
     {
-        return __DIR__ . '/..';
+        return __DIR__.'/..';
     }
 
     public function getCacheDir()
@@ -37,7 +39,7 @@ class Kernel extends BaseKernel
         yield new MessengerBundle();
     }
 
-    protected function configureContainer(ContainerBuilder $container, LoaderInterface $loader)
+    protected function configureContainer(ContainerBuilder $container, LoaderInterface $loader): void
     {
         $container->setParameter('kernel.secret', 'secret');
 
@@ -47,7 +49,7 @@ class Kernel extends BaseKernel
         );
     }
 
-    protected function configureRoutes(RouteCollectionBuilder $routes)
+    protected function configureRoutes(RouteCollectionBuilder $routes): void
     {
     }
 }
