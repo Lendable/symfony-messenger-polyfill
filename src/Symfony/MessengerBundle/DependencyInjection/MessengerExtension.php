@@ -153,4 +153,9 @@ final class MessengerExtension extends ConfigurableExtension
             ->replaceArgument(0, $messageToSendersMapping)
             ->replaceArgument(1, $messagesToSendAndHandle);
     }
+
+    public function getAlias(): string
+    {
+        return 'lendable_polyfill_messanger';
+    }
 }
