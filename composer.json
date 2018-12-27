@@ -10,14 +10,14 @@
   ],
   "autoload": {
     "psr-4": {
-      "Lendable\\Polyfill\\": "src/"
+      "Lendable\\Polyfill\\Symfony\\MessengerBundle\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Tests\\Lendable\\Polyfill\\": "tests/",
-      "Tests\\Lendable\\Polyfill\\Features\\Fixtures\\Project\\": "features/Fixtures/Project/src",
-      "Tests\\Lendable\\Polyfill\\Features\\": "features/"
+      "Tests\\Lendable\\Polyfill\\Symfony\\MessengerBundle\\": "tests/",
+      "Tests\\Lendable\\Polyfill\\Symfony\\MessengerBundle\\Features\\Fixtures\\Project\\": "features/Fixtures/Project/src",
+      "Tests\\Lendable\\Polyfill\\Symfony\\MessengerBundle\\Features\\": "features/"
     }
   },
   "require": {

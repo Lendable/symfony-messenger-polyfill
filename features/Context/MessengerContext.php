@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Lendable\Polyfill\Features\Context;
+namespace Tests\Lendable\Polyfill\Symfony\MessengerBundle\Features\Context;
 
 use Behat\Behat\Context\Context;
 use Behat\Symfony2Extension\Context\KernelDictionary;
@@ -8,7 +8,7 @@ use PHPUnit\Framework\Assert;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\HandledStamp;
-use Tests\Lendable\Polyfill\Features\Fixtures\Project\Query\DoesItWork;
+use Tests\Lendable\Polyfill\Symfony\MessengerBundle\Features\Fixtures\Project\Query\DoesItWork;
 
 class MessengerContext implements Context
 {

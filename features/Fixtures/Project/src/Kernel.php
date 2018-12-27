@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Lendable\Polyfill\Features\Fixtures\Project;
+namespace Tests\Lendable\Polyfill\Symfony\MessengerBundle\Features\Fixtures\Project;
 
 use Lendable\Polyfill\Symfony\MessengerBundle\MessengerBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
@@ -12,7 +12,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 use Symfony\Component\Routing\RouteCollectionBuilder;
-use Tests\Lendable\Polyfill\Features\Fixtures\Project\Handler\DoesItWorkHandler;
+use Tests\Lendable\Polyfill\Symfony\MessengerBundle\Features\Fixtures\Project\Handler\DoesItWorkHandler;
 
 class Kernel extends BaseKernel
 {

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tests\Lendable\Polyfill\Features\Fixtures\Project\Handler;
+namespace Tests\Lendable\Polyfill\Symfony\MessengerBundle\Features\Fixtures\Project\Handler;
 
-use Tests\Lendable\Polyfill\Features\Fixtures\Project\Query\DoesItWork;
+use Tests\Lendable\Polyfill\Symfony\MessengerBundle\Features\Fixtures\Project\Query\DoesItWork;
 
 class DoesItWorkHandler
 {
