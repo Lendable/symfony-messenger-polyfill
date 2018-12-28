@@ -26,10 +26,8 @@ matrix:
     - php: nightly
 
 install:
-  - composer update --dev --prefer-lowest
-
-berfore_script:
   - echo "extension=amqp.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+  - composer update --dev --prefer-lowest
 
 script:
   - composer tests:${TARGET}
