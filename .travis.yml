@@ -25,10 +25,8 @@ matrix:
   allow_failures:
     - php: nightly
 
-berfore_install:
-  - echo "extension = amqp.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
-
-install:
+berfore_script:
+  - echo "extension=amqp.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
   - composer update --dev --prefer-lowest
 
 script:
