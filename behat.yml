@@ -17,7 +17,7 @@ ci:
     default: false
     e2e:
       contexts:
-      - Tests\Lendable\Polyfill\Symfony\MessengerBundle\Features\Context\EndToEndContext:
-          eventBusConnection: "@amqp.connection.event"
+        - Tests\Lendable\Polyfill\Symfony\MessengerBundle\Features\Context\EndToEndContext:
+          messageBus: '@Symfony\Component\Messenger\MessageBusInterface'
       filters:
         tags: "@e2e"
