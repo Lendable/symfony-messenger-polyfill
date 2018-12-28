@@ -25,11 +25,6 @@ matrix:
   allow_failures:
     - php: nightly
 
-before_install:
-  - if [ "${COVERAGE}" == "e2e" ]; then
-
-    fi
-
 install:
   - composer update --dev --prefer-lowest
 
