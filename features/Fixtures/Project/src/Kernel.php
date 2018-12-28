@@ -51,7 +51,7 @@ final class Kernel extends BaseKernel
             (new Definition(DoesItWorkHandler::class))->addTag('messenger.message_handler')
         );
 
-        $container->prependExtensionConfig('lendable_polyfill_messanger', [
+        $container->prependExtensionConfig('lendable_polyfill_messenger', [
             'transports' => [
                 'amqp' => 'amqp://guest:guest@localhost:5672/%2f/messages',
             ],

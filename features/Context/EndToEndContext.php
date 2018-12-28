@@ -8,7 +8,6 @@ use PHPUnit\Framework\Assert;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\MessageBusInterface;
-use Symfony\Component\Messenger\Worker;
 use Tests\Lendable\Polyfill\Symfony\MessengerBundle\Features\Fixtures\Project\Query\AMQPDoesItWork;
 
 class EndToEndContext implements Context
@@ -17,11 +16,6 @@ class EndToEndContext implements Context
 
     private $messageBus;
 
-    /** @var Envelope|null */
-    private $response;
-    /**
-     * @var ContainerInterface
-     */
     private $receiverLocator;
 
     public function __construct(MessageBusInterface $messageBus, ContainerInterface $receiverLocator)
@@ -35,7 +29,7 @@ class EndToEndContext implements Context
      */
     public function iDispatchAQuery()
     {
-        $this->response = $this->messageBus->dispatch(new AMQPDoesItWork());
+        $this->messageBus->dispatch(new AMQPDoesItWork());
     }
 
     /**

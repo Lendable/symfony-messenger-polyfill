@@ -160,6 +160,6 @@ final class MessengerExtension extends ConfigurableExtension
 
     public function getAlias(): string
     {
-        return 'lendable_polyfill_messanger';
+        return 'lendable_polyfill_messenger';
     }
 }

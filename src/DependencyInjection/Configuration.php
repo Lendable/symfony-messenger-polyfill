@@ -14,7 +14,7 @@ final class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('lendable_polyfill_messanger')
+        $rootNode = $treeBuilder->root('lendable_polyfill_messenger')
             ->fixXmlConfig('transport')
             ->fixXmlConfig('bus', 'buses');
 
