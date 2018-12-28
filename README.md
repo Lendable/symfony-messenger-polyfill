@@ -24,7 +24,7 @@ Documentation
 composer require lendable/symfony-messenger-polyfill
 ```
 
-**2.** Register the bundle in your Kernel
+**2.** Register the bundle in your `bundles.php`
 
 ```php
 return [
