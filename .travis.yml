@@ -26,9 +26,7 @@ matrix:
     - php: nightly
 
 berfore_script:
-  - sudo apt install php-amqp
-
-install:
+  - echo "extension = amqp.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
   - composer update --dev --prefer-lowest
 
 script:
