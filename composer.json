@@ -34,11 +34,15 @@
     "behat/symfony2-extension": "^2.1",
     "phpunit/phpunit": "^7.4",
     "matthiasnoback/symfony-dependency-injection-test": "^3.0",
-    "symfony/stopwatch": "^3.4 || ^4.1"
+    "symfony/stopwatch": "^3.4 || ^4.1",
+    "symfony/serializer-pack": "^1.0"
   },
   "scripts": {
     "tests:behat": [
       "behat --strict --colors -vvv"
+    ],
+    "tests:e2e": [
+      "behat --strict --colors --profile=e2e -vvv"
     ],
     "tests:unit": [
       "phpunit --colors --coverage-clover build/logs/clover.xml"

@@ -11,3 +11,13 @@ default:
         debug: true
         path: features/Fixtures/Project/src/Kernel.php
         class: Tests\Lendable\Polyfill\Symfony\MessengerBundle\Features\Fixtures\Project\Kernel
+
+ci:
+  suites:
+    default: false
+    e2e:
+      contexts:
+      - Tests\Lendable\Polyfill\Symfony\MessengerBundle\Features\Context\EndToEndContext:
+          eventBusConnection: "@amqp.connection.event"
+      filters:
+        tags: "@e2e"

@@ -13,6 +13,7 @@ use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 use Symfony\Component\Routing\RouteCollectionBuilder;
 use Tests\Lendable\Polyfill\Symfony\MessengerBundle\Features\Fixtures\Project\Handler\DoesItWorkHandler;
+use Tests\Lendable\Polyfill\Symfony\MessengerBundle\Features\Fixtures\Project\Query\AMQPDoesItWork;
 
 class Kernel extends BaseKernel
 {
@@ -47,6 +48,15 @@ class Kernel extends BaseKernel
             DoesItWorkHandler::class,
             (new Definition(DoesItWorkHandler::class))->addTag('messenger.message_handler')
         );
+
+        $container->prependExtensionConfig('lendable_polyfill_messanger', [
+            'transports' => [
+                'amqp' => 'amqp://guest:guest@localhost:5672/%2f/messages',
+            ],
+            'routing' => [
+                AMQPDoesItWork::class => 'amqp',
+            ],
+        ]);
     }
 
     protected function configureRoutes(RouteCollectionBuilder $routes): void
