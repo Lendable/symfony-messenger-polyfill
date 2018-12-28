@@ -12,7 +12,7 @@ default:
         path: features/Fixtures/Project/src/Kernel.php
         class: Tests\Lendable\Polyfill\Symfony\MessengerBundle\Features\Fixtures\Project\Kernel
 
-ci:
+e2e:
   suites:
     default: false
     e2e:
