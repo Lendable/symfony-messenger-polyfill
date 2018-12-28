@@ -18,6 +18,6 @@ e2e:
     e2e:
       contexts:
         - Tests\Lendable\Polyfill\Symfony\MessengerBundle\Features\Context\EndToEndContext:
-          messageBus: '@Symfony\Component\Messenger\MessageBusInterface'
+            messageBus: '@Symfony\Component\Messenger\MessageBusInterface'
       filters:
         tags: "@e2e"
