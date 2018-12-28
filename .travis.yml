@@ -26,7 +26,20 @@ matrix:
     - php: nightly
 
 before_install:
-  - echo "extension=amqp.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+  - |
+     local ext_name=amqp-1.9.3
+     local ext_so=amqp.so
+     local ext_dir=$(php -r "echo ini_get('extension_dir');")
+     local ext_cache=~/php-ext/$(basename $ext_dir)/$ext_name
+
+     if [[ -e $ext_cache/$ext_so ]]; then
+         echo extension = $ext_cache/$ext_so >> ~/.phpenv/versions/7.2/etc/conf.d/travis.ini
+     else
+         rm ~/.pearrc /tmp/pear 2>/dev/null || true
+         mkdir -p $ext_cache
+         echo yes | pecl install -f $ext_name &&
+         cp $ext_dir/$ext_so $ext_cache
+     fi
 
 install:
   - composer update --dev --prefer-lowest
