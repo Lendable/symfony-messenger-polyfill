@@ -17,26 +17,26 @@ use Tests\Lendable\Polyfill\Symfony\MessengerBundle\Features\Fixtures\Project\Ha
 use Tests\Lendable\Polyfill\Symfony\MessengerBundle\Features\Fixtures\Project\Query\AMQPDoesItWork;
 use Tests\Lendable\Polyfill\Symfony\MessengerBundle\Features\Fixtures\Project\Handler\AMQPDoesItWorkHandler;
 
-class Kernel extends BaseKernel
+final class Kernel extends BaseKernel
 {
     use MicroKernelTrait;
 
-    public function getProjectDir()
+    public function getProjectDir(): string
     {
         return __DIR__.'/..';
     }
 
-    public function getCacheDir()
+    public function getCacheDir(): string
     {
         return $this->getProjectDir().'/var/cache/test';
     }
 
-    public function getLogDir()
+    public function getLogDir(): string
     {
         return $this->getProjectDir().'/var/logs';
     }
 
-    public function registerBundles()
+    public function registerBundles(): \Generator
     {
         yield new FrameworkBundle();
         yield new MessengerBundle();

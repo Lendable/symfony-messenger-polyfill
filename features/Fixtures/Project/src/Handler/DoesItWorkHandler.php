@@ -6,9 +6,9 @@ namespace Tests\Lendable\Polyfill\Symfony\MessengerBundle\Features\Fixtures\Proj
 
 use Tests\Lendable\Polyfill\Symfony\MessengerBundle\Features\Fixtures\Project\Query\DoesItWork;
 
-class DoesItWorkHandler
+final class DoesItWorkHandler
 {
-    public function __invoke(DoesItWork $query)
+    public function __invoke(DoesItWork $query): string
     {
         return 'works';
     }
