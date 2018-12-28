@@ -12,8 +12,10 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 use Symfony\Component\Routing\RouteCollectionBuilder;
+use Tests\Lendable\Polyfill\Symfony\MessengerBundle\Features\Fixtures\Project\DependencyInjection\Compiler\ExposeServicesAsPublicForTestingCompilerPass;
 use Tests\Lendable\Polyfill\Symfony\MessengerBundle\Features\Fixtures\Project\Handler\DoesItWorkHandler;
 use Tests\Lendable\Polyfill\Symfony\MessengerBundle\Features\Fixtures\Project\Query\AMQPDoesItWork;
+use Tests\Lendable\Polyfill\Symfony\MessengerBundle\Features\Fixtures\Project\Handler\AMQPDoesItWorkHandler;
 
 class Kernel extends BaseKernel
 {
@@ -57,6 +59,8 @@ class Kernel extends BaseKernel
                 AMQPDoesItWork::class => 'amqp',
             ],
         ]);
+
+        $container->addCompilerPass(new ExposeServicesAsPublicForTestingCompilerPass());
     }
 
     protected function configureRoutes(RouteCollectionBuilder $routes): void

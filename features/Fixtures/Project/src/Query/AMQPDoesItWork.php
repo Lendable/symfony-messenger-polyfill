@@ -6,4 +6,10 @@ namespace Tests\Lendable\Polyfill\Symfony\MessengerBundle\Features\Fixtures\Proj
 
 class AMQPDoesItWork
 {
+    public $works;
+
+    public function __construct(string $works = 'works')
+    {
+        $this->works = $works;
+    }
 }

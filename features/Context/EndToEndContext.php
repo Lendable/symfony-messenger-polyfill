@@ -5,9 +5,10 @@ namespace Tests\Lendable\Polyfill\Symfony\MessengerBundle\Features\Context;
 use Behat\Behat\Context\Context;
 use Behat\Symfony2Extension\Context\KernelDictionary;
 use PHPUnit\Framework\Assert;
+use Psr\Container\ContainerInterface;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\MessageBusInterface;
-use Symfony\Component\Messenger\Stamp\HandledStamp;
+use Symfony\Component\Messenger\Worker;
 use Tests\Lendable\Polyfill\Symfony\MessengerBundle\Features\Fixtures\Project\Query\AMQPDoesItWork;
 
 class EndToEndContext implements Context
@@ -18,10 +19,15 @@ class EndToEndContext implements Context
 
     /** @var Envelope|null */
     private $response;
+    /**
+     * @var ContainerInterface
+     */
+    private $receiverLocator;
 
-    public function __construct(MessageBusInterface $messageBus)
+    public function __construct(MessageBusInterface $messageBus, ContainerInterface $receiverLocator)
     {
         $this->messageBus = $messageBus;
+        $this->receiverLocator = $receiverLocator;
     }
 
     /**
@@ -37,9 +43,13 @@ class EndToEndContext implements Context
      */
     public function iShouldGetAResponse()
     {
-        $stamps = $this->response->all();
-        Assert::assertArrayHasKey(HandledStamp::class, $stamps);
-        Assert::assertNotEmpty($stamps[HandledStamp::class]);
-        Assert::assertSame('works', $stamps[HandledStamp::class][0]->getResult());
+        $receiver = $this->receiverLocator->get('amqp');
+
+        $receiver->receive(function (Envelope $envelope) use ($receiver)  {
+            $message = $envelope->getMessage();
+            Assert::assertInstanceOf(AMQPDoesItWork::class, $message);
+            Assert::assertSame('works', $message->works);
+            $receiver->stop();
+        });
     }
 }

@@ -25,6 +25,9 @@ matrix:
   allow_failures:
     - php: nightly
 
+berfore_install:
+  - pecl install amqp
+
 install:
   - composer update --dev --prefer-lowest
 
