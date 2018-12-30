@@ -12,28 +12,31 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 use Symfony\Component\Routing\RouteCollectionBuilder;
+use Tests\Lendable\Polyfill\Symfony\MessengerBundle\Features\Fixtures\Project\DependencyInjection\Compiler\ExposeServicesAsPublicForTestingCompilerPass;
 use Tests\Lendable\Polyfill\Symfony\MessengerBundle\Features\Fixtures\Project\Handler\DoesItWorkHandler;
+use Tests\Lendable\Polyfill\Symfony\MessengerBundle\Features\Fixtures\Project\Query\AMQPDoesItWork;
+use Tests\Lendable\Polyfill\Symfony\MessengerBundle\Features\Fixtures\Project\Handler\AMQPDoesItWorkHandler;
 
-class Kernel extends BaseKernel
+final class Kernel extends BaseKernel
 {
     use MicroKernelTrait;
 
-    public function getProjectDir()
+    public function getProjectDir(): string
     {
         return __DIR__.'/..';
     }
 
-    public function getCacheDir()
+    public function getCacheDir(): string
     {
         return $this->getProjectDir().'/var/cache/test';
     }
 
-    public function getLogDir()
+    public function getLogDir(): string
     {
         return $this->getProjectDir().'/var/logs';
     }
 
-    public function registerBundles()
+    public function registerBundles(): \Generator
     {
         yield new FrameworkBundle();
         yield new MessengerBundle();
@@ -47,6 +50,17 @@ class Kernel extends BaseKernel
             DoesItWorkHandler::class,
             (new Definition(DoesItWorkHandler::class))->addTag('messenger.message_handler')
         );
+
+        $container->prependExtensionConfig('lendable_polyfill_messenger', [
+            'transports' => [
+                'amqp' => 'amqp://guest:guest@localhost:5672/%2f/messages',
+            ],
+            'routing' => [
+                AMQPDoesItWork::class => 'amqp',
+            ],
+        ]);
+
+        $container->addCompilerPass(new ExposeServicesAsPublicForTestingCompilerPass());
     }
 
     protected function configureRoutes(RouteCollectionBuilder $routes): void

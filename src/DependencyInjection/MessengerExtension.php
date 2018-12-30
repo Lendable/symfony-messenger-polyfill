@@ -19,6 +19,7 @@ use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Transport\TransportFactoryInterface;
 use Symfony\Component\Messenger\Transport\TransportInterface;
 use Symfony\Component\Stopwatch\Stopwatch;
+use Symfony\Bundle\FrameworkBundle\DependencyInjection\Configuration;
 
 final class MessengerExtension extends ConfigurableExtension
 {
@@ -37,7 +38,10 @@ final class MessengerExtension extends ConfigurableExtension
         $container->registerForAutoconfiguration(TransportFactoryInterface::class)
             ->addTag('messenger.transport_factory');
 
-        $frameworkConfig = $container->getExtensionConfig('framework');
+        $frameworkConfig = $this->processConfiguration(
+            new Configuration($container->getParameter('kernel.debug')),
+            $container->getExtensionConfig('framework')
+        );
 
         $this->registerMessengerConfiguration(
             $config,
@@ -156,6 +160,6 @@ final class MessengerExtension extends ConfigurableExtension
 
     public function getAlias(): string
     {
-        return 'lendable_polyfill_messanger';
+        return 'lendable_polyfill_messenger';
     }
 }

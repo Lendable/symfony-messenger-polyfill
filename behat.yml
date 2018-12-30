@@ -11,3 +11,14 @@ default:
         debug: true
         path: features/Fixtures/Project/src/Kernel.php
         class: Tests\Lendable\Polyfill\Symfony\MessengerBundle\Features\Fixtures\Project\Kernel
+
+e2e:
+  suites:
+    default: false
+    e2e:
+      contexts:
+        - Tests\Lendable\Polyfill\Symfony\MessengerBundle\Features\Context\EndToEndContext:
+            messageBus: '@Symfony\Component\Messenger\MessageBusInterface'
+            receiverLocator: '@messenger.receiver_locator'
+      filters:
+        tags: "@e2e"
