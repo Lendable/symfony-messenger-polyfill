@@ -32,9 +32,11 @@
   "require-dev": {
     "behat/behat": "^3.5",
     "behat/symfony2-extension": "^2.1",
-    "phpunit/phpunit": "^7.4",
     "matthiasnoback/symfony-dependency-injection-test": "^3.0",
-    "symfony/serializer-pack": "^1.0",
+    "phpunit/phpunit": "^7.4",
+    "symfony/property-access": "^3.4 || ^4.0",
+    "symfony/property-info": "^3.4 || ^4.0",
+    "symfony/serializer": "^3.4 || ^4.0",
     "symfony/stopwatch": "^3.4 || ^4.0"
   },
   "scripts": {
