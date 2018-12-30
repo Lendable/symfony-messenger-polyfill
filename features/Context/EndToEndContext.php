@@ -39,7 +39,7 @@ class EndToEndContext implements Context
     {
         $receiver = $this->receiverLocator->get('amqp');
 
-        $receiver->receive(function (Envelope $envelope) use ($receiver)  {
+        $receiver->receive(static function (Envelope $envelope) use ($receiver): void {
             $message = $envelope->getMessage();
             Assert::assertInstanceOf(AMQPDoesItWork::class, $message);
             Assert::assertSame('works', $message->works);
