@@ -1,13 +1,18 @@
 {
   "name": "lendable/symfony-messenger-polyfill",
-  "description": "Use symfony messenger with older symfony versions.",
   "type": "symfony-bundle",
+  "description": "Use Symfony Messenger v4.2 with older Symfony versions.",
+  "keywords": ["lendable", "symfony3", "symfony4", "bundle", "messenger", "symfony-messenger", "polyfill"],
+  "minimum-stability": "stable",
+  "license": "MIT",
+  
   "authors": [
     {
       "name": "Lendable Ltd",
       "email": "dev@lendable.co.uk"
     }
   ],
+  
   "autoload": {
     "psr-4": {
       "Lendable\\Polyfill\\Symfony\\MessengerBundle\\": "src/"
@@ -20,6 +25,7 @@
       "Tests\\Lendable\\Polyfill\\Symfony\\MessengerBundle\\Features\\": "features/"
     }
   },
+  
   "require": {
     "php": ">=7.1",
     "symfony/config": "^3.4 || ^4.0",
@@ -39,6 +45,7 @@
     "symfony/serializer": "^3.4 || ^4.0",
     "symfony/stopwatch": "^3.4 || ^4.0"
   },
+  
   "scripts": {
     "tests:behat": [
       "behat --strict --colors -vvv"
@@ -49,5 +56,11 @@
     "tests:unit": [
       "phpunit --colors --coverage-clover build/logs/clover.xml"
     ]
-  }
+  },
+
+  "config": {
+    "bin-dir": "bin",
+    "sort-packages": true
+  },
+  "prefer-stable": true
 }
