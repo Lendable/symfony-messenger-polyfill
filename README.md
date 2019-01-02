@@ -57,7 +57,6 @@ You would write:
 ```yaml
 # config/packages/messenger.yaml
 lendable_polyfill_messenger:
-    messenger:
-        routing:
-            'My\Message\Message':  amqp # The name of the defined transport
+    routing:
+        'My\Message\Message':  amqp # The name of the defined transport
 ```
