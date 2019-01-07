@@ -46,13 +46,12 @@ final class MessengerExtension extends ConfigurableExtension
             $container->removeDefinition('messenger.transport.symfony_serializer');
             $container->removeDefinition('messenger.transport.amqp.factory');
         } else {
-            if ($config['serializer']['enabled'] && ('messenger.transport.symfony_serializer' === $config['serializer']['id'] || $config['serializer']['id'] === null)) {
+            if ($config['serializer']['enabled'] && ('messenger.transport.symfony_serializer' === $config['serializer']['id'] || null === $config['serializer']['id'])) {
                 $container->getDefinition('messenger.transport.symfony_serializer')
                     ->replaceArgument(1, $config['serializer']['format'])
                     ->replaceArgument(2, $config['serializer']['context']);
-            }
-
-            if ($config['serializer']['id']) {
+                $container->setAlias('messenger.transport.serializer', 'messenger.transport.symfony_serializer');
+            } elseif (null !== $config['serializer']['id']) {
                 $container->setAlias('messenger.transport.serializer', $config['serializer']['id']);
             } else {
                 $container->removeDefinition('messenger.transport.amqp.factory');
