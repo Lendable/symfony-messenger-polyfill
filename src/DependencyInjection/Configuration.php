@@ -37,10 +37,10 @@ final class Configuration implements ConfigurationInterface
                                 ];
                             } else {
                                 $newConfig[$v['message-class']]['senders'] = \array_map(
-                                    function ($a) {
+                                    static function ($a) {
                                         return \is_string($a) ? $a : $a['service'];
                                     },
-                                    array_values($v['sender'])
+                                    \array_values($v['sender'])
                                 );
                                 $newConfig[$v['message-class']]['send-and-handle'] = $v['send-and-handle'] ?? false;
                             }
@@ -140,8 +140,8 @@ final class Configuration implements ConfigurationInterface
                                         }
 
                                         return [
-                                            'id' => key($middleware),
-                                            'arguments' => current($middleware),
+                                            'id' => \key($middleware),
+                                            'arguments' => \current($middleware),
                                         ];
                                     })
                                 ->end()
