@@ -19,7 +19,6 @@ use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Transport\TransportFactoryInterface;
 use Symfony\Component\Messenger\Transport\TransportInterface;
 use Symfony\Component\Stopwatch\Stopwatch;
-use Symfony\Bundle\FrameworkBundle\DependencyInjection\Configuration;
 
 final class MessengerExtension extends ConfigurableExtension
 {
@@ -38,34 +37,16 @@ final class MessengerExtension extends ConfigurableExtension
         $container->registerForAutoconfiguration(TransportFactoryInterface::class)
             ->addTag('messenger.transport_factory');
 
-        $frameworkConfig = $this->processConfiguration(
-            new Configuration($container->getParameter('kernel.debug')),
-            $container->getExtensionConfig('framework')
-        );
-
-        $this->registerMessengerConfiguration(
-            $config,
-            $container,
-            $frameworkConfig['serializer'] ?? [],
-            $frameworkConfig['validation'] ?? []
-        );
+        $this->registerMessengerConfiguration($config, $container);
     }
 
-    private function registerMessengerConfiguration(
-        array $config,
-        ContainerBuilder $container,
-        array $serializerConfig,
-        array $validationConfig
-    ): void {
+    private function registerMessengerConfiguration(array $config, ContainerBuilder $container): void
+    {
         if (empty($config['transports'])) {
             $container->removeDefinition('messenger.transport.symfony_serializer');
             $container->removeDefinition('messenger.transport.amqp.factory');
         } else {
-            if ('messenger.transport.symfony_serializer' === $config['serializer']['id']) {
-                if (!($serializerConfig['enabled'] ?? false)) {
-                    throw new \LogicException('The default Messenger serializer cannot be enabled as the Serializer support is not available. Try enabling it or running "composer require symfony/serializer-pack".');
-                }
-
+            if ($config['serializer']['enabled'] && ('messenger.transport.symfony_serializer' === $config['serializer']['id'] || $config['serializer']['id'] === null)) {
                 $container->getDefinition('messenger.transport.symfony_serializer')
                     ->replaceArgument(1, $config['serializer']['format'])
                     ->replaceArgument(2, $config['serializer']['context']);
@@ -99,7 +80,7 @@ final class MessengerExtension extends ConfigurableExtension
             }
 
             foreach ($middleware as $middlewareItem) {
-                if (!($validationConfig['enabled'] ?? false) && \in_array($middlewareItem['id'], ['validation', 'messenger.middleware.validation'], true)) {
+                if (!($config['validation']['enabled'] ?? false) && \in_array($middlewareItem['id'], ['validation', 'messenger.middleware.validation'], true)) {
                     throw new \LogicException('The Validation middleware is only available when the Validator component is installed and enabled. Try running "composer require symfony/validator".');
                 }
             }
