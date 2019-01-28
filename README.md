@@ -5,9 +5,10 @@ Allows to use Symfony Messenger with Symfony 3.4 and 4.0.
 
 [![PHP Version](https://img.shields.io/badge/php-%5E7.1-blue.svg)](https://img.shields.io/badge/php-%5E7.1-blue.svg)
 [![Latest Stable Version](https://poser.pugx.org/lendable/symfony-messenger-polyfill/v/stable)](https://packagist.org/packages/lendable/symfony-messenger-polyfill)
-[![Latest Unstable Version](https://poser.pugx.org/klendable/symfony-messenger-polyfill/v/unstable)](https://packagist.org/packages/lendable/symfony-messenger-polyfill)
+[![Latest Unstable Version](https://poser.pugx.org/lendable/symfony-messenger-polyfill/v/unstable)](https://packagist.org/packages/lendable/symfony-messenger-polyfill)
 
 [![Build Status](https://travis-ci.org/Lendable/symfony-messenger-polyfill.svg?branch=master)](https://travis-ci.org/Lendable/symfony-messenger-polyfill)
+[![Total Downloads](https://poser.pugx.org/lendable/symfony-messenger-polyfill/downloads)](https://packagist.org/packages/lendable/symfony-messenger-polyfill)
 
 Documentation
 -------------
