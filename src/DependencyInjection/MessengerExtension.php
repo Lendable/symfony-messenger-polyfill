@@ -95,7 +95,11 @@ final class MessengerExtension extends ConfigurableExtension
                 $container->setAlias('message_bus', $busId)->setPublic(true);
                 $container->setAlias(MessageBusInterface::class, $busId);
             } else {
-                $container->registerAliasForArgument($busId, MessageBusInterface::class);
+                if (method_exists($container, 'registerAliasForArgument')) {
+                    $container->registerAliasForArgument($busId, MessageBusInterface::class);
+                } else {
+                    $this->registerAliasForArgument($container, $busId, MessageBusInterface::class);
+                }
             }
         }
 
@@ -141,5 +145,16 @@ final class MessengerExtension extends ConfigurableExtension
     public function getAlias(): string
     {
         return 'lendable_polyfill_messenger';
+    }
+    
+    private function registerAliasForArgument(ContainerBuilder $container, string $id, string $type, string $name = null): Alias
+    {
+        $name = lcfirst(str_replace(' ', '', ucwords(preg_replace('/[^a-zA-Z0-9\x7f-\xff]++/', ' ', $name ?? $id))));
+
+        if (!preg_match('/^[a-zA-Z_\x7f-\xff]/', $name)) {
+            throw new InvalidArgumentException(sprintf('Invalid argument name "%s" for service "%s": the first character must be a letter.', $name, $id));
+        }
+
+        return $container->setAlias($type . ' $' . $name, $id);
     }
 }
