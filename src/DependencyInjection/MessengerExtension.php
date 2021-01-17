@@ -147,7 +147,7 @@ final class MessengerExtension extends ConfigurableExtension
         return 'lendable_polyfill_messenger';
     }
     
-    private function registerAliasForArgument(ContainerBuilder $container, string $id, string $type, string $name = null): Alias
+    private function registerAliasForArgument(ContainerBuilder $container, string $id, string $type, string $name = null)
     {
         $name = lcfirst(str_replace(' ', '', ucwords(preg_replace('/[^a-zA-Z0-9\x7f-\xff]++/', ' ', $name ?? $id))));
 
